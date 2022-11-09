@@ -27,7 +27,7 @@ class TestTrainee {
     void testAllArgsConstructor(){
         LocalDate birthdate = LocalDate.of(2000,2, 29);
         Trainee trainee = new Trainee("John", "Doe", birthdate);
-        assertEquals("Jhnon", trainee.getFirstname(), "firstname");
+        assertEquals("John", trainee.getFirstname(), "firstname");
         assertEquals("Doe", trainee.getLastname(), "lastname");
         assertEquals(birthdate, trainee.getBirthdate(), "birthdate");
     }
