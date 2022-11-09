@@ -44,8 +44,8 @@ public class Trainee {
     public String toString() {
         return "Trainee{"
                 + firstname + ' '
-                + lastname + " ("
+                + lastname + " ; "
                 + birthdate
-                + ")}";
+                + '}';
     }
 }
