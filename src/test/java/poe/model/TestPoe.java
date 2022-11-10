@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,5 +36,66 @@ class TestPoe {
         assertNull(poe.getPoeType());
         assertTrue(poe.getTrainees().isEmpty(), "trainees is an empty collection");
     }
+
+    @Test
+    void testAddTrainee(){
+        Poe poe = Poe.builder()
+                .title("Java Fullstack")
+                .beginDate(LocalDate.of(2022, 10, 24))
+                .endDate(LocalDate.of(2023, 1, 27))
+                .poeType(PoeType.POEI)
+                .build();
+        Trainee trainee = Trainee.builder()
+                .firstname("Wesh")
+                .build();
+        poe.addTrainee(trainee);
+    }
+
+    @Test
+    void testAddTraineesCollection(){
+        Poe poe = Poe.builder()
+                .title("Java Fullstack")
+                .beginDate(LocalDate.of(2022, 10, 24))
+                .endDate(LocalDate.of(2023, 1, 27))
+                .poeType(PoeType.POEI)
+                .build();
+        Trainee trainee1 = Trainee.builder()
+                .firstname("Marcel")
+                .build();
+        Trainee trainee2 = Trainee.builder()
+                .firstname("Michel")
+                .build();
+        Set<Trainee> trainees = Set.of(trainee1, trainee2);
+        poe.addTrainees(trainees);
+    }
+
+    @Test
+    void testAddTraineesVarArgs(){
+        Poe poe = Poe.builder()
+                .title("Java Fullstack")
+                .beginDate(LocalDate.of(2022, 10, 24))
+                .endDate(LocalDate.of(2023, 1, 27))
+                .poeType(PoeType.POEI)
+                .build();
+        Trainee trainee1 = Trainee.builder()
+                .firstname("Marcel")
+                .build();
+        Trainee trainee2 = Trainee.builder()
+                .firstname("Michel")
+                .build();
+        poe.addTrainees(trainee1, trainee2);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
