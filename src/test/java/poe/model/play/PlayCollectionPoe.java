@@ -1,17 +1,23 @@
 package poe.model.play;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import poe.model.Poe;
 import poe.model.PoeType;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class PlayCollectionPoe {
+class PlayCollectionPoe {
 
-    @Test
-    void playWithListPoe() {
-        List<Poe> poeList = List.of(
+    static List<Poe> poeList;
+
+    @BeforeAll
+    static void initData() {
+        poeList = List.of(
                 new Poe(
                         "Java Fullstack",
                         LocalDate.of(2022,10,24),
@@ -27,7 +33,7 @@ public class PlayCollectionPoe {
                 new Poe(
                         "Consultant Devops",
                         LocalDate.of(2022,6,13),
-                        LocalDate.of(2023,9,16),
+                        LocalDate.of(2022,9,16),
                         PoeType.POEC
                 ),
                 new Poe(
@@ -49,6 +55,35 @@ public class PlayCollectionPoe {
                         PoeType.POEI
                 )
         );
-        System.out.println(poeList);
+    }
+
+    // 1. compter les POEI
+    @Test
+    void countPOEI() {
+        long countPOEI = poeList.stream()
+                .filter(poe -> PoeType.POEI.equals((poe.getPoeType())))
+                .count();
+        System.out.println("Nombre POEI: " + countPOEI);
+
+
+    }
+
+    // 2. Moyenne de la durée (en jours) des POE
+    @Test
+    void averageDurationInDays() {
+        poeList.stream()
+                .skip(1)
+                .limit(3)
+                .mapToLong(poe -> ChronoUnit.DAYS.between(
+                        poe.getBeginDate(),
+                        poe.getEndDate()
+                ))
+                .peek(d -> System.out.println("DEBUG: poe duration = " + d))
+                .average()
+                .ifPresent(averageDuration -> System.out.println(
+                        "La durée moyenne des POE est : "
+                        + averageDuration
+                        + " jours"
+                ));
     }
 }
