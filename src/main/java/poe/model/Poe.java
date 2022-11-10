@@ -1,12 +1,12 @@
 package poe.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter @Setter
@@ -15,6 +15,9 @@ public class Poe {
     private LocalDate beginDate;
     private LocalDate endDate;
     private PoeType poeType;
+
+    @Builder.Default
+    private List<Trainee> trainees = new ArrayList<>();
 
     @Override
     public String toString() {
