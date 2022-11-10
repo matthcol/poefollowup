@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.List;
+import java.util.*;
 
 class PlayCollectionPoe {
 
@@ -85,5 +85,28 @@ class PlayCollectionPoe {
                         + averageDuration
                         + " jours"
                 ));
+    }
+
+    @Test
+    void sortPoe(){
+        // NavigableSet<Poe> poeSet = new TreeSet<>(poeList);
+        // System.out.println(poeSet);
+        // List<Poe> poeList2 = new ArrayList<>(poeList);
+        // Collections.sort(poeList2);
+
+        //Comparator<Poe> comparatorPoe = (p1, p2) -> -1;
+
+        // Comparator<Poe> comparatorPoe = Comparator.comparing(Poe::getBeginDate);
+
+//        Comparator<Poe> comparatorPoe = Comparator.comparing(
+//                Poe::getBeginDate,
+//                Comparator.reverseOrder());
+
+        // par PoeType puis par date croissante
+        Comparator<Poe> comparatorPoe = Comparator.comparing(Poe::getPoeType)
+                .thenComparing(Poe::getBeginDate);
+        NavigableSet<Poe> poeSet = new TreeSet<>(comparatorPoe);
+        poeSet.addAll(poeList);
+        System.out.println(poeSet);
     }
 }
